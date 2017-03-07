@@ -11,6 +11,14 @@ module RateExchange
       "#{format('%.2f', amount)} #{currency}"
     end
 
+    def convert_to(to_currency)
+      raise RateExchange::UnsupportedBaseCurrency.new(currency) if self.class.rates[currency].nil?
+      raise RateExchange::UnsupportedCurrency.new(to_currency) if self.class.rates[currency][to_currency].nil?
+
+      Money.new(amount * self.class.rates[currency][to_currency], to_currency)
+    end
+
+
     def self.conversion_rates(base_currency, conversion_rates)
       @@rates = { base_currency => conversion_rates }
     end
