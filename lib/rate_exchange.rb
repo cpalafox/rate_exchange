@@ -1,0 +1,3 @@
+module RateExchange
+  # Your code goes here...
+end
