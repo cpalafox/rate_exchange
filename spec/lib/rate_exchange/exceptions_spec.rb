@@ -19,3 +19,30 @@ describe RateExchange::UnsupportedBaseCurrency do
     end
   end
 end
+
+describe RateExchange::MoneyAsDivisor do
+  describe 'when raised' do
+    it 'gives explanation' do
+      exception = RateExchange::MoneyAsDivisor.new()
+      expect(exception.to_s).to eq "You can't use a Money object as a divisor"
+    end
+  end
+end
+
+describe RateExchange::MoneyAsMultiplier do
+  describe 'when raised' do
+    it 'gives explanation' do
+      exception = RateExchange::MoneyAsMultiplier.new()
+      expect(exception.to_s).to eq "You can't use a Money object as a multiplier"
+    end
+  end
+end
+
+describe RateExchange::WrongTypeForOperation do
+  describe 'when raised' do
+    it 'gives explanation' do
+      exception = RateExchange::WrongTypeForOperation.new(RateExchange::Money.new(2, 'EUR'), 2, :+)
+      expect(exception.to_s).to eq "You can't use (2) for RateExchange::Money#+ method"
+    end
+  end
+end

@@ -1,5 +1,8 @@
+require 'rate_exchange/money/arithmetic'
+
 module RateExchange
   class Money
+    include Money::Arithmetic
     attr_reader :amount, :currency
 
     def initialize(amount, currency)
